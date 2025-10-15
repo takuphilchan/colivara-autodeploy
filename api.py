@@ -51,6 +51,9 @@ from rapidfuzz import fuzz
 import jieba
 import jieba.posseg as pseg
 from dataclasses import dataclass
+from pathlib import Path
+
+home = Path.home()
 # MCP Client imports - install with: pip install mcp
 try:
     from mcp import ClientSession, StdioServerParameters
@@ -2331,7 +2334,7 @@ def normalize_numbers_fast(text: str) -> str:
 class MermaidAgent:
     """Enhanced Agent with intelligent diagram detection and generation"""
     
-    def __init__(self, mcp_config_path="/home/enine/.mcphost.yml"):
+    def __init__(self, mcp_config_path = home / ".mcphost.yml"):
         self.mcp_config_path = mcp_config_path
         self.logger = logging.getLogger('mermaid_agent')
         
@@ -3310,7 +3313,7 @@ class MermaidAgent:
         try:
             server_params = StdioServerParameters(
                 command="node",
-                args=["/home/enine/prime/mcp-mermaid-enhanced/build/index.js"]
+                args = [str(home / "mcp-mermaid-enhanced" / "build" / "index.js")]
             )
             
             async with stdio_client(server_params) as (read, write):
@@ -3378,7 +3381,7 @@ class MermaidAgent:
             # Check for recently created files
             possible_dirs = [
                 "/tmp/",
-                "/home/enine/prime/mcp-mermaid-enhanced/",
+                str(home / "mcp-mermaid-enhanced"),
                 os.getcwd() + "/"
             ]
             
