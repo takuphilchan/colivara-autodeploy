@@ -1,4 +1,4 @@
-# ColiVara-AutoDeploy
+# colivara-autodeploy
 
 **Automated deployment wrapper for ColiVara with extended API features and testing interface**
 
@@ -6,7 +6,7 @@
 
 ## 📖 About
 
-**ColiVara-AutoDeploy** is an automated deployment solution that simplifies the setup of the powerful [ColiVara](https://github.com/tjmlabs/ColiVara) RAG system with a single command, while extending it with enhanced query capabilities and a testing interface.
+**colivara-autodeploy** is an automated deployment solution that simplifies the setup of the powerful [ColiVara](https://github.com/tjmlabs/ColiVara) RAG system with a single command, while extending it with enhanced query capabilities and a testing interface.
 
 ### 🙏 Credits
 
@@ -127,8 +127,8 @@ Embedding Service (8000)    Document Images
 
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/ColiVara-AutoDeploy.git
-cd ColiVara-AutoDeploy
+git clone https://github.com/takuphilchan/colivara-autodeploy.git
+cd colivara-autodeploy
 
 # Run the setup script
 chmod +x setup_colivara.sh
@@ -152,7 +152,7 @@ The script automatically:
 ## 📁 Project Structure
 
 ```
-ColiVara-AutoDeploy/
+colivara-autodeploy/
 ├── setup_colivara.sh      # Automated installation script
 ├── api.py                 # Extended Query API (Port 5001)
 ├── app.py                 # Testing web interface (Port 5000)
@@ -483,9 +483,9 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/ColiVara-AutoDeploy/issues)
+- **Issues**: [GitHub Issues](https://github.com/your-username/colivara-autodeploy/issues)
 - **Original ColiVara**: [ColiVara Repo](https://github.com/tjmlabs/ColiVara)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/ColiVara-AutoDeploy/discussions)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/colivara-autodeploy/discussions)
 
 ---
 
