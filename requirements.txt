@@ -1,0 +1,119 @@
+Pillow
+
+# Flask app
+flask
+flask_session
+werkzeug
+
+# Utility and security
+requests
+bleach
+
+# Virus scanning
+# clamd
+
+# LangChain integrations
+langchain
+langchain_ollama
+
+# Custom client (assumed to be from PyPI or locally installed)
+colivara_py
+colpali_engine
+# For retrying HTTP requests
+urllib3
+tinycss2
+
+minio
+jieba
+aiofiles
+# Core packages
+aiohttp
+aiosignal
+anyio
+async-timeout
+attrs
+certifi
+charset-normalizer
+click
+dnspython
+email-validator
+fastapi
+h11
+httpcore
+httpx
+idna
+Jinja2
+MarkupSafe
+numpy
+orjson
+pydantic
+python-dotenv
+PyYAML
+requests
+starlette
+typing-extensions
+uvicorn
+uvloop
+websockets
+yarl
+
+# ML/DL related (adjust CUDA versions as needed)
+#torch
+#torchaudio
+#torchvision
+#transformers
+#tokenizers
+tqdm
+
+# Optional (remove if not needed)
+#huggingface-hub
+pillow
+rich
+
+
+# Web Frameworks
+fastapi>=0.104.1
+flask>=2.3.3
+uvicorn>=0.24.0
+
+# Pydantic for data validation
+pydantic>=2.5.0
+
+# HTTP and networking
+requests>=2.31.0
+httpx>=0.25.2
+urllib3>=2.1.0
+
+# ColiVara (RAG/document processing)
+colivara-py>=0.1.0
+
+# Image processing
+Pillow>=10.1.0
+
+# Object storage
+minio>=7.2.0
+
+# File operations
+aiofiles>=23.2.0
+
+# Chinese text processing
+jieba>=0.42.1
+
+# Data processing and analysis
+pandas>=2.1.4
+tabulate>=0.9.0
+
+# Text similarity and fuzzy matching
+rapidfuzz>=3.5.2
+
+# Markdown processing
+markdown>=3.5.1
+
+# Security
+pyjwt>=2.8.0
+
+# Database
+# Note: sqlite3 is included with Python standard library
+
+# Utilities (most are Python built-ins, but listing external ones)
+# uuid, json, base64, os, logging, time, re, io, socket, hashlib, secrets, datetime, functools, threading, traceback, tempfile, mimetypes, platform, sys, math, unicodedata, collections, difflib, dataclasses, typing - these are all built-in Python modules
