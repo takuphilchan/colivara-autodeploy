@@ -4,6 +4,10 @@
 
 ---
 
+![Sign-in Page](images/signin-example.png)
+![Main Frontend](images/main-frontend-example.png)
+
+
 ## 📖 About
 
 **colivara-autodeploy** is an automated deployment solution that simplifies the setup of the powerful [ColiVara](https://github.com/tjmlabs/ColiVara) RAG system with a single command, while extending it with enhanced query capabilities and a testing interface.
