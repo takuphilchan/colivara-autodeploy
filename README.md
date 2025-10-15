@@ -4,7 +4,7 @@
 
 ---
 
-![Sign-in Page](images/signin-example.png)
+![Sign-in Page](images/signin-example.png) 
 ![Main Frontend](images/main-frontend-example.png)
 
 
