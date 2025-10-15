@@ -25,7 +25,7 @@ readonly BUCKET_NAME="${BUCKET_NAME:-colivara}"
 
 # Model Configuration
 readonly COLQWEN_MODEL="vidore/colqwen2-v1.0"
-readonly OLLAMA_MODEL="${OLLAMA_MODEL:-qwen2.5-vl:32b}"
+readonly OLLAMA_MODEL="${OLLAMA_MODEL:-qwen2.5vl:32b}"
 
 # PyTorch Configuration
 readonly TORCH_INDEX_URL="${TORCH_INDEX_URL:-https://download.pytorch.org/whl/cu118}"
@@ -1197,7 +1197,7 @@ Environment Variables:
   OLLAMA_PORT          Port for Ollama service (default: 11434)
   MINIO_ROOT_USER      MinIO admin username (default: miniokey)
   MINIO_ROOT_PASSWORD  MinIO admin password (default: miniosecret)
-  OLLAMA_MODEL         Ollama model to pull (default: qwen2.5-vl:32b)
+  OLLAMA_MODEL         Ollama model to pull (default: qwen2.5vl:32b)
 
 Project Structure:
   Your repository should contain:
