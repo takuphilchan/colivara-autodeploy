@@ -4,8 +4,21 @@
 
 ---
 
-![Sign-in Page](images/signin-example.png) 
-![Main Frontend](images/main-frontend-example.png)
+### Example Screenshots
+
+<div style="display: flex; gap: 30px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/signin-example.png" alt="Sign-in Page" style="width:100%; border:1px solid #ccc; border-radius:8px;">
+    <p style="text-align:center;"><strong>Sign-in Page:</strong> Users enter credentials to access the system securely.</p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/main-frontend-example.png" alt="Main Frontend" style="width:100%; border:1px solid #ccc; border-radius:8px;">
+    <p style="text-align:center;"><strong>Main Frontend:</strong> Interactive dashboard for document querying, uploads, and visualization.</p>
+  </div>
+
+</div>
 
 
 ## 📖 About
