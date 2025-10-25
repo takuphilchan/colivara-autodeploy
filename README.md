@@ -85,7 +85,7 @@ ColiVara Document Q&A is a production-ready RAG (Retrieval-Augmented Generation)
 
 ### Multi-Service Architecture
 
-\`\`\`
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                     User Interface (Port 5000)              │
 │                    Flask Web Application                     │
@@ -104,7 +104,7 @@ ColiVara Document Q&A is a production-ready RAG (Retrieval-Augmented Generation)
 │   RAG    │ │ Service │ │  S3     │ │ pgvector │
 │  :8001   │ │  :8000  │ │  :9000  │ │  :5432   │
 └──────────┘ └─────────┘ └─────────┘ └──────────┘
-\`\`\`
+```
 
 ### Technology Stack
 
@@ -136,7 +136,7 @@ ColiVara Document Q&A is a production-ready RAG (Retrieval-Augmented Generation)
 
 ### Quick Start (Automated)
 
-\`\`\`bash
+```bash
 # Clone the repository
 git clone https://github.com/yourusername/colivara-autodeploy.git
 cd colivara-autodeploy
@@ -144,7 +144,7 @@ cd colivara-autodeploy
 # Run the automated setup script
 chmod +x setup_colivara.sh
 ./setup_colivara.sh
-\`\`\`
+```
 
 The setup script will:
 1. ✅ Check/install Python 3.10
@@ -164,7 +164,7 @@ The setup script will:
 
 ### Starting the Application
 
-\`\`\`bash
+```bash
 # Activate virtual environment
 source venv/bin/activate
 
@@ -173,11 +173,11 @@ python app.py
 
 # Start API server (Terminal 2)
 python api_server.py
-\`\`\`
+```
 
 ### Accessing the Application
 
-1. **Open your browser** and navigate to: \`http://localhost:5000\`
+1. **Open your browser** and navigate to: `http://localhost:5000`
 2. **Register** a new account or **login** with existing credentials
 3. **Upload documents** via the Documents page
 4. **Ask questions** about your documents on the Query page
@@ -198,7 +198,7 @@ python api_server.py
 ### Configuration Options
 
 #### Query Settings
-- **Collection Name**: Document collection to query (default: \`my_collection\`)
+- **Collection Name**: Document collection to query (default: `my_collection`)
 - **Max Pages**: Number of document pages to retrieve (1-10)
 - **Similarity Threshold**: Minimum similarity score (0.0-1.0)
 - **Include Next Page**: Automatically include following pages
@@ -207,8 +207,8 @@ python api_server.py
 #### Provider Settings
 
 **Ollama (Local)**
-- URL: \`http://localhost:11434\`
-- Model: \`qwen2.5vl:32b\`
+- URL: `http://localhost:11434`
+- Model: `qwen2.5vl:32b`
 
 **OpenAI**
 - API Key: Your OpenAI API key
@@ -228,9 +228,9 @@ python api_server.py
 
 ### Environment Variables
 
-Create a \`.env\` file in the root directory:
+Create a `.env` file in the root directory:
 
-\`\`\`bash
+```bash
 # Flask Configuration
 FLASK_SECRET_KEY=your-secret-key-here
 FLASK_HOST=0.0.0.0
@@ -258,7 +258,7 @@ OLLAMA_MODEL=qwen2.5vl:32b
 OPENAI_API_KEY=your-openai-key
 ANTHROPIC_API_KEY=your-anthropic-key
 OPENROUTER_API_KEY=your-openrouter-key
-\`\`\`
+```
 
 ### Service Ports
 
@@ -284,7 +284,7 @@ The API server runs on port 5001 and provides the following endpoints:
 #### Query Endpoints
 
 **POST /api/query** - RAG-based query with document retrieval
-\`\`\`json
+```json
 {
   "query": "What is the main topic?",
   "collection_name": "my_collection",
@@ -295,40 +295,40 @@ The API server runs on port 5001 and provides the following endpoints:
   "include_next_page": false,
   "allow_general_fallback": true
 }
-\`\`\`
+```
 
 **POST /api/query-llm** - Pure LLM query without documents
-\`\`\`json
+```json
 {
   "query": "Explain quantum computing",
   "provider": "openai",
   "provider_settings": {"apiKey": "sk-...", "model": "gpt-4o"}
 }
-\`\`\`
+```
 
 #### Document Endpoints
 
 **POST /api/upload** - Upload document
-\`\`\`bash
+```bash
 curl -X POST -F "file=@document.pdf" http://localhost:5001/api/upload
-\`\`\`
+```
 
 **GET /api/documents** - List documents
-\`\`\`bash
+```bash
 curl http://localhost:5001/api/documents?collection_name=my_collection
-\`\`\`
+```
 
 **DELETE /api/delete/{filename}** - Delete document
-\`\`\`bash
+```bash
 curl -X DELETE http://localhost:5001/api/delete/document.pdf
-\`\`\`
+```
 
 ### Interactive API Documentation
 
 FastAPI provides automatic interactive documentation:
 
-- **Swagger UI**: \`http://localhost:5001/docs\`
-- **ReDoc**: \`http://localhost:5001/redoc\`
+- **Swagger UI**: `http://localhost:5001/docs`
+- **ReDoc**: `http://localhost:5001/redoc`
 
 ---
 
@@ -337,24 +337,24 @@ FastAPI provides automatic interactive documentation:
 ### Common Issues
 
 #### Port Already in Use
-\`\`\`bash
+```bash
 # Check which process is using the port
 sudo lsof -i :5000
 sudo lsof -i :5001
 
 # Kill the process
 kill -9 <PID>
-\`\`\`
+```
 
 #### Database Errors
-\`\`\`bash
+```bash
 # Reset database
 rm -rf data/*.db
 python -c "from models.database import init_db; init_db()"
-\`\`\`
+```
 
 #### Ollama Connection Errors
-\`\`\`bash
+```bash
 # Check Ollama status
 systemctl status ollama
 
@@ -363,22 +363,22 @@ systemctl restart ollama
 
 # Check available models
 ollama list
-\`\`\`
+```
 
 #### ColiVara Services Not Running
-\`\`\`bash
+```bash
 cd ColiVara
 docker-compose down
 docker-compose up -d
 docker-compose ps
-\`\`\`
+```
 
 ---
 
 ## 🔄 Service Management
 
 ### Restart All Services
-\`\`\`bash
+```bash
 # Restart Flask and FastAPI
 pkill -f "python app.py"
 pkill -f "python api_server.py"
@@ -391,13 +391,13 @@ systemctl restart ollama
 # Restart ColiVara Services
 cd ColiVara
 docker-compose restart
-\`\`\`
+```
 
 ---
 
-## �� Project Structure
+## 📂 Project Structure
 
-\`\`\`
+```
 colivara-autodeploy/
 ├── app.py                  # Flask web application
 ├── api_server.py          # FastAPI backend server
@@ -428,14 +428,14 @@ colivara-autodeploy/
 │   └── auth.py       # Auth middleware
 │
 ├── utils/            # Utility functions
-
+│
 ├── data/              # Database and data files
 │   └── .gitkeep       # Preserve directory structure
 │
 ├── logs/             # Application logs
 ├── uploads/          # Temporary file uploads
 └── screenshots/      # README screenshots
-\`\`\`
+```
 
 ---
 
