@@ -1,524 +1,499 @@
-# colivara-autodeploy
+# 📚 ColiVara Document Q&A System
 
-**Automated deployment wrapper for ColiVara with extended API features and testing interface**
+<div align="center">
 
----
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-teal.svg)
 
-### Example Screenshots
+**An intelligent document question-answering system with RAG (Retrieval-Augmented Generation) capabilities**
 
-<div style="display: flex; gap: 30px; flex-wrap: wrap;">
-
-  <div style="flex: 1; min-width: 300px;">
-    <img src="images/signin-example.png" alt="Sign-in Page" style="width:100%; border:1px solid #ccc; border-radius:8px;">
-    <p style="text-align:center;"><strong>Sign-in Page:</strong> Users enter credentials to access the system securely.</p>
-  </div>
-
-  <div style="flex: 1; min-width: 300px;">
-    <img src="images/main-frontend-example.png" alt="Main Frontend" style="width:100%; border:1px solid #ccc; border-radius:8px;">
-    <p style="text-align:center;"><strong>Main Frontend:</strong> Interactive dashboard for document querying, uploads, and visualization.</p>
-  </div>
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [Screenshots](#-screenshots) • [Credits](#-credits)
 
 </div>
 
+---
 
-## 📖 About
+## 🎯 Overview
 
-**colivara-autodeploy** is an automated deployment solution that simplifies the setup of the powerful [ColiVara](https://github.com/tjmlabs/ColiVara) RAG system with a single command, while extending it with enhanced query capabilities and a testing interface.
+ColiVara Document Q&A is a production-ready RAG (Retrieval-Augmented Generation) system that enables intelligent conversations with your documents. Built on top of the powerful [ColiVara](https://github.com/tjmlabs/ColiVara) framework, it provides a complete web interface with user authentication, document management, and multi-provider LLM support.
 
-### 🙏 Credits
+### ✨ Key Highlights
 
-This project is built upon the excellent work by **TJM Labs**:
-
-- **[ColiVara](https://github.com/tjmlabs/ColiVara)** - Core document RAG framework and REST API
-- **[ColiVarE](https://github.com/tjmlabs/ColiVarE)** - Embedding service powered by ColQwen2
-
-**All credit for the core RAG functionality belongs to the original authors.**
-
-### 🎯 What This Repository Adds
-
-This repository simplifies deployment and extends functionality:
-
-| Feature | Port | Description |
-|---------|------|-------------|
-| **🚀 One-Command Setup** | - | Automated script installs everything from scratch |
-| **🔧 Extended Query API** | 5001 | Enhanced API with advanced document querying, multi-page context, diagram generation, and fuzzy search |
-| **🧪 Testing Web App** | 5000 | Interactive interface for testing queries and document uploads |
-| **📦 Complete Integration** | - | Pre-configured systemd services with health monitoring |
-| **🐍 Auto Python Setup** | - | Automatically installs Python 3.10 if not present |
-| **🤖 Ollama Integration** | 11434 | Automatic Ollama setup with Qwen2.5-VL model |
-| **📥 Model Management** | - | Auto-downloads ColQwen2 model from Hugging Face |
+- 🔍 **Visual Document Understanding** - Powered by ColQwen2 vision models for accurate document comprehension
+- 🤖 **Multi-Provider LLM Support** - Works with Ollama (local), OpenAI, Anthropic, and OpenRouter
+- 🎚️ **RAG/Pure LLM Toggle** - Switch between document-grounded and general knowledge responses
+- 📁 **Document Management** - Upload, view, search, and delete documents with ease
+- 🔐 **User Authentication** - Secure login system with session management
+- 🎨 **Modern UI** - Clean, responsive interface with dark mode support
+- 🚀 **One-Command Setup** - Automated installation script for complete deployment
 
 ---
 
-## ✨ Extended Query API Features (Port 5001)
+## 📸 Screenshots
 
-The enhanced Query API on **port 5001** extends ColiVara with:
+### Login Page
+![Login Page](screenshots/login.png)
 
-### Advanced Document Querying
-- **Multi-Document Context**: Retrieves and analyzes pages from multiple documents simultaneously
-- **Fuzzy Query Expansion**: Automatically expands queries with related terms for better search coverage
-- **Similarity Threshold Filtering**: Configurable score thresholds for result quality
-- **Next Page Inclusion**: Option to include adjacent pages for better context
-- **General Knowledge Fallback**: Falls back to LLM general knowledge when documents don't match
+*Secure authentication system with clean, modern design*
 
-### Visual Processing
-- **Vision-Language Model Integration**: Uses Ollama with Qwen2.5-VL for visual document understanding
-- **Multi-Page Image Processing**: Processes multiple document pages as images
-- **Base64 Image Handling**: Direct image data in responses for frontend display
+### Main Query Interface
+![Main Interface](screenshots/main-page.png)
 
-### Intelligent Diagram Generation
-- **Automatic Diagram Detection**: AI determines when diagrams would be helpful
-- **Mermaid Syntax Generation**: Creates flowcharts, sequence diagrams, and more from document content
-- **MCP Integration**: Uses Model Context Protocol for enhanced diagram rendering
-- **Document-Based Diagrams**: Generates diagrams from actual document images
+*Interactive chat interface with RAG/LLM toggle, provider selection, and query settings*
 
-### Document Management
-- **Upload Single/Bulk**: Upload individual files or entire folders
-- **Duplicate Detection**: Prevents re-uploading existing documents
-- **Comprehensive Metadata**: Tracks upload time, file size, source, and more
-- **Smart Search**: Partial match and case-insensitive document search
-- **Bulk Delete**: Delete multiple documents by keyword matching
-- **Document Preview**: Preview pages with actual images
+### Documents Management
+![Documents Page](screenshots/documents.png)
 
-### Enhanced Features
-- **Table Detection & Parsing**: Automatically extracts and formats tables from documents
-- **Section Boosting**: Boosts relevance of key document sections
-- **Debug Information**: Detailed processing logs for transparency
-- **Source Tracking**: Complete document and page attribution
+*Upload, search, filter, and manage your document collection*
+
+---
+
+## 🚀 Features
+
+### Document Processing
+- ✅ Multi-format support (PDF, DOC, DOCX, TXT, images)
+- ✅ Visual document understanding with ColQwen2
+- ✅ Page-level vector embeddings
+- ✅ Smart pagination and context retrieval
+- ✅ Source citation with similarity scores
+
+### Query Capabilities
+- ✅ **RAG Mode**: Document-grounded answers with source citations
+- ✅ **Pure LLM Mode**: General knowledge responses without documents
+- ✅ Adjustable similarity thresholds
+- ✅ Multi-page context retrieval
+- ✅ General knowledge fallback option
+
+### LLM Provider Support
+- 🦙 **Ollama** - Local LLM (qwen2.5vl:32b default)
+- 🤖 **OpenAI** - GPT-4o, GPT-4o-mini, GPT-4-turbo
+- 🧠 **Anthropic** - Claude 3 Opus, Sonnet, Haiku
+- 🌐 **OpenRouter** - Access to multiple models (Claude 3.5, GPT-4o, Gemini)
+
+### User Interface
+- 📱 Responsive design (desktop, tablet, mobile)
+- 💬 Chat history management
+- ⚙️ Real-time settings adjustment
+- 🔔 Toast notifications for feedback
+- 🎨 Clean, modern Material Design
 
 ---
 
 ## 🏗️ Architecture
 
-### Service Overview
+### Multi-Service Architecture
 
-| Service | Port | Source | Description |
-|---------|------|--------|-------------|
-| **Embedding Service** | 8000 | ColiVarE | ColQwen2 embedding generation |
-| **ColiVara API** | 8001 | ColiVara | Core document management REST API |
-| **MinIO Console** | 9001 | ColiVara | S3-compatible storage interface |
-| **Ollama** | 11434 | Auto-installed | Local LLM inference (Qwen2.5-VL) |
-| **Query API** ⭐ | 5001 | **This Repo** | Extended query processing with VLM & diagrams |
-| **Web App** ⭐ | 5000 | **This Repo** | Testing and demo interface |
+\`\`\`
+┌─────────────────────────────────────────────────────────────┐
+│                     User Interface (Port 5000)              │
+│                    Flask Web Application                     │
+└─────────────────┬───────────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  API Server (Port 5001)                      │
+│                FastAPI Business Logic                        │
+└─────────────────┬───────────────────────────────────────────┘
+                  │
+        ┌─────────┼─────────┬──────────────┐
+        ▼         ▼         ▼              ▼
+┌──────────┐ ┌─────────┐ ┌─────────┐ ┌──────────┐
+│ ColiVara │ │Embedding│ │  MinIO  │ │PostgreSQL│
+│   RAG    │ │ Service │ │  S3     │ │ pgvector │
+│  :8001   │ │  :8000  │ │  :9000  │ │  :5432   │
+└──────────┘ └─────────┘ └─────────┘ └──────────┘
+\`\`\`
 
-⭐ = Extended features added by this repository
+### Technology Stack
 
-### Data Flow
-
-```
-User Query → Query API (5001)
-              ↓
-    ┌─────────┴─────────────────┐
-    ↓                           ↓
-ColiVara Search API (8001)   Ollama VLM (11434)
-    ↓                           ↓
-Embedding Service (8000)    Document Images
-    ↓                           ↓
-  Document Retrieval ←→ Visual Analysis
-              ↓
-      Combined Response
-      (Text + Images + Diagrams)
-```
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Frontend** | HTML, CSS, JavaScript | User interface |
+| **Web Server** | Flask 3.0 | Authentication, routing |
+| **API Server** | FastAPI 0.104 | Business logic, query processing |
+| **RAG Engine** | ColiVara | Document retrieval, vector search |
+| **Embeddings** | ColQwen2 | Visual document understanding |
+| **Vector DB** | PostgreSQL + pgvector | Vector storage |
+| **Object Storage** | MinIO | Document storage |
+| **LLM Runtime** | Ollama | Local LLM inference |
 
 ---
 
-## 🚀 Quick Start
+## 📋 Prerequisites
 
-### Prerequisites
+- **OS**: Linux (Ubuntu 20.04+ recommended)
+- **RAM**: 16GB minimum (32GB recommended for large models)
+- **Disk**: 50GB free space
+- **GPU**: NVIDIA GPU with 8GB+ VRAM (optional, improves performance)
+- **Python**: 3.10+ (auto-installed if missing)
+- **Docker**: Required for ColiVara services
 
-**Required:**
-- Linux OS (Ubuntu 20.04+, Debian, RHEL, CentOS, Fedora, Arch)
-- Docker & Docker Compose
-- Git
-- 8GB+ RAM (16GB+ recommended)
-- 50GB+ free disk space
+---
 
-**Auto-Installed:**
-- Python 3.10
-- Ollama
-- All Python dependencies
+## 🛠️ Installation
 
-### Installation
+### Quick Start (Automated)
 
-**One command deploys everything:**
-
-```bash
-# Clone this repository
-git clone https://github.com/takuphilchan/colivara-autodeploy.git
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/yourusername/colivara-autodeploy.git
 cd colivara-autodeploy
 
-# Run the setup script
+# Run the automated setup script
 chmod +x setup_colivara.sh
 ./setup_colivara.sh
-```
+\`\`\`
 
-The script automatically:
-1. ✅ Installs Python 3.10 if missing
-2. ✅ Clones ColiVara and ColiVarE repositories
-3. ✅ Downloads ColQwen2 model from Hugging Face
-4. ✅ Installs and configures Ollama
-5. ✅ Pulls Qwen2.5-VL model
-6. ✅ Sets up 4 systemd services
-7. ✅ Configures health monitoring
-8. ✅ Starts all services
-
-**Setup time:** 15-30 minutes (depends on internet speed)
-
----
-
-## 📁 Project Structure
-
-```
-colivara-autodeploy/
-├── setup_colivara.sh      # Automated installation script
-├── api.py                 # Extended Query API (Port 5001)
-├── app.py                 # Testing web interface (Port 5000)
-├── templates/             # HTML templates for web app
-├── logs/                  # Service logs (auto-created)
-├── ColiVara/             # Core ColiVara API (auto-cloned)
-├── ColiVarE/             # Embedding service (auto-cloned)
-└── README.md             # This file
-```
+The setup script will:
+1. ✅ Check/install Python 3.10
+2. ✅ Install system dependencies
+3. ✅ Set up Python virtual environment
+4. ✅ Install Python packages
+5. ✅ Install and configure Ollama
+6. ✅ Download ColQwen2 model
+7. ✅ Set up ColiVara services (Docker)
+8. ✅ Configure environment variables
+9. ✅ Initialize databases
+10. ✅ Start all services
 
 ---
 
 ## 🎮 Usage
 
-### Access the Services
+### Starting the Application
 
-After installation:
+\`\`\`bash
+# Activate virtual environment
+source venv/bin/activate
 
-```bash
-# Extended Query API (This Repo)
-http://your-server:5001
+# Start web app (Terminal 1)
+python app.py
 
-# Testing Web Interface (This Repo)
-http://your-server:5000
+# Start API server (Terminal 2)
+python api_server.py
+\`\`\`
 
-# ColiVara API Documentation (Original)
-http://your-server:8001/v1/docs
+### Accessing the Application
 
-# MinIO Console (Original)
-http://your-server:9001
-```
+1. **Open your browser** and navigate to: \`http://localhost:5000\`
+2. **Register** a new account or **login** with existing credentials
+3. **Upload documents** via the Documents page
+4. **Ask questions** about your documents on the Query page
 
-### Default Credentials
+### Using the Query Interface
 
-**Admin Account:**
-- Username: `admin`
-- Password: `admin123`
-- ⚠️ **Change immediately in production!**
+#### RAG Mode (Default)
+1. Toggle **"Use Knowledge Base"** ON (blue badge shows "RAG")
+2. Upload documents via the Documents page
+3. Enter your question and select LLM provider
+4. Get answers with source citations
 
-**MinIO:**
-- Access Key: `miniokey`
-- Secret Key: `miniosecret`
+#### Pure LLM Mode
+1. Toggle **"Use Knowledge Base"** OFF (orange badge shows "LLM")
+2. Enter your question
+3. Get general knowledge responses without document context
 
-### API Examples
+### Configuration Options
 
-#### Extended Query API (Port 5001)
+#### Query Settings
+- **Collection Name**: Document collection to query (default: \`my_collection\`)
+- **Max Pages**: Number of document pages to retrieve (1-10)
+- **Similarity Threshold**: Minimum similarity score (0.0-1.0)
+- **Include Next Page**: Automatically include following pages
+- **Allow General Knowledge**: Fallback to LLM when no documents match
 
-**Basic Query:**
-```bash
-curl -X POST "http://localhost:5001/query" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "api_key": "your_api_key",
-    "query": "What are the requirements for establishing a sole proprietorship?",
-    "similarity_threshold": 0.25
-  }'
-```
+#### Provider Settings
 
-**Query with Next Page Context:**
-```bash
-curl -X POST "http://localhost:5001/query" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "api_key": "your_api_key",
-    "query": "Explain the process flow",
-    "include_next_page": true,
-    "max_additional_pages": 2,
-    "similarity_threshold": 0.25
-  }'
-```
+**Ollama (Local)**
+- URL: \`http://localhost:11434\`
+- Model: \`qwen2.5vl:32b\`
 
-**Query with Diagram Generation:**
-```bash
-curl -X POST "http://localhost:5001/query" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "api_key": "your_api_key",
-    "query": "Show me the workflow diagram",
-    "include_next_page": true,
-    "allow_general_fallback": true
-  }'
-```
+**OpenAI**
+- API Key: Your OpenAI API key
+- Model: gpt-4o, gpt-4o-mini, gpt-4-turbo
 
-**Upload Document:**
-```bash
-curl -X POST "http://localhost:5001/upload" \
-  -F "file=@document.pdf" \
-  -F "api_key=your_api_key" \
-  -F "collection_name=default_collection"
-```
+**OpenRouter**
+- API Key: Your OpenRouter API key
+- Model: anthropic/claude-3.5-sonnet, openai/gpt-4o, etc.
 
-**Bulk Upload from Folder:**
-```bash
-curl -X POST "http://localhost:5001/upload-bulk" \
-  -F "folder_path=/path/to/documents" \
-  -F "api_key=your_api_key" \
-  -F "collection_name=default_collection" \
-  -F "max_concurrent=3"
-```
-
-**Search Documents:**
-```bash
-curl "http://localhost:5001/search-documents?query=invoice&api_key=your_api_key"
-```
-
-**List All Documents:**
-```bash
-curl "http://localhost:5001/documents?api_key=your_api_key&collection_name=default_collection"
-```
-
-**Preview Document:**
-```bash
-curl "http://localhost:5001/preview/document.pdf?api_key=your_api_key&page_number=1&max_pages=3"
-```
-
-**Delete Document:**
-```bash
-curl -X DELETE "http://localhost:5001/delete/document.pdf?api_key=your_api_key"
-```
-
-**Bulk Delete by Keyword:**
-```bash
-curl -X DELETE "http://localhost:5001/delete-matching?keyword=_draft&api_key=your_api_key"
-```
-
-**Health Check:**
-```bash
-curl "http://localhost:5001/health"
-```
-
-#### Original ColiVara API (Port 8001)
-
-**Search Documents:**
-```bash
-curl -X POST "http://localhost:8001/v1/search" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "financial report",
-    "collection_name": "my_docs",
-    "top_k": 5
-  }'
-```
+**Anthropic**
+- API Key: Your Anthropic API key
+- Model: claude-3-opus, claude-3-sonnet, claude-3-haiku
 
 ---
 
-## ⚙️ Configuration
+## 🔧 Configuration
 
 ### Environment Variables
 
-Customize before running setup:
+Create a \`.env\` file in the root directory:
 
-```bash
-# Service Ports
-export EMBEDDING_PORT=8000        # ColiVarE embedding service
-export COLIVARA_API_PORT=8001     # Core ColiVara API
-export APP_PORT=5000              # Testing web interface
-export QUERY_API_PORT=5001        # Extended query API
-export MINIO_PORT=9001            # MinIO console
-export OLLAMA_PORT=11434          # Ollama service
+\`\`\`bash
+# Flask Configuration
+FLASK_SECRET_KEY=your-secret-key-here
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
 
-# Storage
-export MINIO_ROOT_USER=miniokey
-export MINIO_ROOT_PASSWORD=miniosecret
-export BUCKET_NAME=colivara
+# FastAPI Configuration
+API_HOST=0.0.0.0
+API_PORT=5001
 
-# Models
-export OLLAMA_MODEL=qwen2.5-vl:32b
-export TORCH_INDEX_URL=https://download.pytorch.org/whl/cu118
+# Database Configuration
+DATABASE_URL=sqlite:///./data/app.db
 
-# Run setup
-./setup_colivara.sh
-```
+# ColiVara Services
+COLIVARA_URL=http://localhost:8001
+EMBEDDING_URL=http://localhost:8000
+MINIO_URL=http://localhost:9000
+MINIO_ACCESS_KEY=minioadmin
+MINIO_SECRET_KEY=minioadmin
 
----
+# Ollama Configuration
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=qwen2.5vl:32b
 
-## 🔧 Service Management
+# API Keys (Optional)
+OPENAI_API_KEY=your-openai-key
+ANTHROPIC_API_KEY=your-anthropic-key
+OPENROUTER_API_KEY=your-openrouter-key
+\`\`\`
 
-```bash
-# View all services
-systemctl status 'colivara-*'
+### Service Ports
 
-# Individual service control
-sudo systemctl start colivara-embedding.service
-sudo systemctl stop colivara-api.service
-sudo systemctl restart colivara-query-api.service
-sudo systemctl restart colivara-app.service
-
-# View logs
-journalctl -u colivara-query-api.service -f
-tail -f logs/query-api.log
-tail -f logs/app.log
-
-# Health checks
-curl http://localhost:5001/health
-curl http://localhost:8000/health
-curl http://localhost:8001/v1/docs
-```
+| Service | Port | Description |
+|---------|------|-------------|
+| Flask Web App | 5000 | Main user interface |
+| FastAPI Server | 5001 | API endpoints |
+| ColiVara RAG | 8001 | Document retrieval |
+| Embedding Service | 8000 | ColQwen2 embeddings |
+| MinIO | 9000 | S3 object storage |
+| MinIO Console | 9001 | MinIO admin interface |
+| PostgreSQL | 5432 | Vector database |
+| Ollama | 11434 | Local LLM |
 
 ---
 
-## 🔄 Troubleshooting
+## 📚 API Documentation
 
-### Services Won't Start
+### FastAPI Endpoints
 
-```bash
-# Check status
-sudo systemctl status colivara-query-api.service
+The API server runs on port 5001 and provides the following endpoints:
 
-# View logs
-journalctl -u colivara-query-api.service -n 100
-cat logs/query-api.log
-```
+#### Query Endpoints
 
-### Port Conflicts
+**POST /api/query** - RAG-based query with document retrieval
+\`\`\`json
+{
+  "query": "What is the main topic?",
+  "collection_name": "my_collection",
+  "provider": "ollama",
+  "provider_settings": {"url": "http://localhost:11434", "model": "qwen2.5vl:32b"},
+  "max_additional_pages": 1,
+  "similarity_threshold": 0.25,
+  "include_next_page": false,
+  "allow_general_fallback": true
+}
+\`\`\`
 
-```bash
-# Reset everything
-./setup_colivara.sh --reset
+**POST /api/query-llm** - Pure LLM query without documents
+\`\`\`json
+{
+  "query": "Explain quantum computing",
+  "provider": "openai",
+  "provider_settings": {"apiKey": "sk-...", "model": "gpt-4o"}
+}
+\`\`\`
 
-# Check port usage
+#### Document Endpoints
+
+**POST /api/upload** - Upload document
+\`\`\`bash
+curl -X POST -F "file=@document.pdf" http://localhost:5001/api/upload
+\`\`\`
+
+**GET /api/documents** - List documents
+\`\`\`bash
+curl http://localhost:5001/api/documents?collection_name=my_collection
+\`\`\`
+
+**DELETE /api/delete/{filename}** - Delete document
+\`\`\`bash
+curl -X DELETE http://localhost:5001/api/delete/document.pdf
+\`\`\`
+
+### Interactive API Documentation
+
+FastAPI provides automatic interactive documentation:
+
+- **Swagger UI**: \`http://localhost:5001/docs\`
+- **ReDoc**: \`http://localhost:5001/redoc\`
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### Port Already in Use
+\`\`\`bash
+# Check which process is using the port
+sudo lsof -i :5000
 sudo lsof -i :5001
-sudo lsof -i :8000
-```
 
-### Model Download Issues
+# Kill the process
+kill -9 <PID>
+\`\`\`
 
-```bash
-# Check disk space
-df -h
+#### Database Errors
+\`\`\`bash
+# Reset database
+rm -rf data/*.db
+python -c "from models.database import init_db; init_db()"
+\`\`\`
 
-# Manual model download
-cd ColiVarE
-source .venv/bin/activate
-python -c "from huggingface_hub import snapshot_download; \
-           snapshot_download('vidore/colqwen2-v1.0', \
-           local_dir='models_hub/vidore/colqwen2-v1.0')"
-```
-
-### Query API Issues
-
-```bash
-# Check if Ollama is running
-curl http://localhost:11434/api/tags
+#### Ollama Connection Errors
+\`\`\`bash
+# Check Ollama status
+systemctl status ollama
 
 # Restart Ollama
-sudo systemctl restart ollama
+systemctl restart ollama
 
-# Check ColiVara connection
-curl http://localhost:8001/v1/docs
-```
+# Check available models
+ollama list
+\`\`\`
 
----
-
-## 📊 Hardware Recommendations
-
-| Component | Minimum | Recommended | Optimal |
-|-----------|---------|-------------|---------|
-| **CPU** | 4 cores | 8 cores | 16+ cores |
-| **RAM** | 8GB | 16GB | 32GB+ |
-| **GPU** | None | 8GB VRAM | 16GB+ VRAM |
-| **Storage** | 50GB | 100GB SSD | 500GB+ NVMe |
-
-### Performance Expectations
-
-- Document Processing: 1-5 seconds per page
-- Query Latency: 2-5 seconds (with VLM)
-- Diagram Generation: 3-8 seconds
-- Concurrent Users: 10-50 (hardware dependent)
+#### ColiVara Services Not Running
+\`\`\`bash
+cd ColiVara
+docker-compose down
+docker-compose up -d
+docker-compose ps
+\`\`\`
 
 ---
 
-## 🛡️ Production Checklist
+## 🔄 Service Management
 
-- [ ] Change default admin password
-- [ ] Update MinIO credentials  
-- [ ] Configure HTTPS reverse proxy
-- [ ] Set up firewall rules
-- [ ] Enable automatic backups
-- [ ] Configure monitoring
-- [ ] Set up log aggregation
-- [ ] Review security settings
-- [ ] Update API keys
+### Restart All Services
+\`\`\`bash
+# Restart Flask and FastAPI
+pkill -f "python app.py"
+pkill -f "python api_server.py"
+python app.py &
+python api_server.py &
+
+# Restart Ollama
+systemctl restart ollama
+
+# Restart ColiVara Services
+cd ColiVara
+docker-compose restart
+\`\`\`
+
+---
+
+## �� Project Structure
+
+\`\`\`
+colivara-autodeploy/
+├── app.py                  # Flask web application
+├── api_server.py          # FastAPI backend server
+├── requirements.txt       # Python dependencies
+├── .env.example          # Environment variables template
+├── setup_colivara.sh     # Automated setup script
+│
+├── routes/              # Flask blueprints
+│   ├── auth.py         # Authentication routes
+│   └── main.py         # Main app routes
+│
+├── templates/           # HTML templates
+│   ├── index.html      # Main query interface
+│   ├── documents.html  # Document management
+│   └── login.html      # Login/register page
+│
+├── static/             # Static assets
+│   ├── css/           # Stylesheets
+│   └── js/            # JavaScript files
+│
+├── models/            # Database models
+│   └── database.py    # SQLAlchemy models
+│
+├── services/          # Business logic
+│   └── auth.py       # Authentication service
+│
+├── middleware/        # Flask middleware
+│   └── auth.py       # Auth middleware
+│
+├── utils/            # Utility functions
+
+├── data/              # Database and data files
+│   └── .gitkeep       # Preserve directory structure
+│
+├── logs/             # Application logs
+├── uploads/          # Temporary file uploads
+└── screenshots/      # README screenshots
+\`\`\`
+
+---
+
+## 🙏 Credits
+
+This project is built upon the excellent work by **TJM Labs**:
+
+- **[ColiVara](https://github.com/tjmlabs/ColiVara)** - Core RAG framework and REST API
+- **[ColiVarE](https://github.com/tjmlabs/ColiVarE)** - Embedding service powered by ColQwen2
+
+**All credit for the core RAG functionality and visual document understanding belongs to the original authors.**
+
+### What This Project Adds
+
+- 🎨 Complete web interface with authentication
+- 🔄 Dual-mode querying (RAG vs Pure LLM)
+- 🤖 Multi-provider LLM support
+- 📁 Document management UI
+- 🚀 Automated deployment scripts
+- ⚙️ Real-time configuration interface
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
----
-
-## 📝 License
-
-MIT License - see [LICENSE](LICENSE) file
-
----
-
-## 🙏 Acknowledgments
-
-### Core Projects
-- **[ColiVara](https://github.com/tjmlabs/ColiVara)** by TJM Labs - Core RAG framework
-- **[ColiVarE](https://github.com/tjmlabs/ColiVarE)** by TJM Labs - Embedding service
-- **[ColPali](https://github.com/illuin-tech/colpali)** - Vision language model
-- **[Ollama](https://ollama.ai/)** - Local LLM inference
-
-### What We Added
-- **Automated deployment script** - One-command setup
-- **Extended Query API (port 5001)** - Advanced querying with:
-  - Multi-document context retrieval
-  - Vision-language model integration
-  - Intelligent diagram generation
-  - Fuzzy query expansion
-  - Table detection and parsing
-  - Document preview with images
-  - Bulk upload and management
-- **Testing web interface (port 5000)** - Interactive UI
-- **Production systemd services** - Health monitoring and auto-restart
-- **Comprehensive documentation** - Setup guides and API examples
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/colivara-autodeploy/issues)
-- **Original ColiVara**: [ColiVara Repo](https://github.com/tjmlabs/ColiVara)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/colivara-autodeploy/discussions)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/colivara-autodeploy/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/colivara-autodeploy/discussions)
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Enhanced diagram types (Gantt, ER diagrams)
-- [ ] Multi-language document support
-- [ ] Advanced analytics dashboard
-- [ ] Kubernetes deployment manifests
-- [ ] Docker Compose simplified deployment
-- [ ] Cloud deployment guides (AWS, GCP, Azure)
-- [ ] Batch processing improvements
-- [ ] Real-time collaboration features
+- [ ] Add streaming responses for LLM queries
+- [ ] Implement conversation memory/context
+- [ ] Add batch document upload
+- [ ] Create document preview functionality
+- [ ] Add cost estimation for API providers
+- [ ] Implement user roles and permissions
+- [ ] Add Docker compose for entire stack
 
 ---
 
-**Built to simplify ColiVara deployment and extend its capabilities**
+<div align="center">
 
-Based on the excellent [ColiVara](https://github.com/tjmlabs/ColiVara) framework by TJM Labs
+**Made with ❤️ using ColiVara, Flask, and FastAPI**
+
+[⬆ Back to Top](#-colivara-document-qa-system)
+
+</div>

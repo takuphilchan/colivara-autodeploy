@@ -1,8 +1,57 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
-.env
-.DS_Store
-.vscode/
-app_database.db
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Flask
+flask_session/
 instance/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+data/
+!data/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.tmp
+*.bak
+*.backup
+.python_setup_done
+
+# Documentation artifacts
+images/
+mermaid_diagrams/
+backup*/

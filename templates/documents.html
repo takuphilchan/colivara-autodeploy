@@ -3,127 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document Management - Document Q&A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --success: #10b981;
+            --error: #ef4444;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #f8f9fa;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
         }
-        .container {
-            max-width: 1200px;
-        }
+        
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
-        .document-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            padding: 15px;
-            transition: transform 0.2s;
-        }
-        .document-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        .upload-section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-        }
-        .btn-danger {
-            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
-            border: none;
-        }
-        .action-buttons {
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 14px 28px;
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            justify-content: space-between;
+            align-items: center;
         }
-        .back-button {
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, #3b82f6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .nav-link:hover {
+            background: #f1f5f9;
+            color: var(--text-primary);
+        }
+        
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px 28px;
+        }
+        
+        .page-header {
+            margin-bottom: 28px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .upload-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border: 2px dashed var(--border);
+            transition: all 0.3s;
+        }
+        
+        .upload-section.drag-over {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+        
+        .upload-form {
+            display: flex;
+            gap: 12px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-primary:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 14px;
+            align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 8px 14px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            background: #f9fafb;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .document-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            transition: all 0.2s;
+        }
+        
+        .document-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        
+        .doc-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            font-size: 24px;
+        }
+        
+        .doc-icon.pdf { background: #fef2f2; color: #dc2626; }
+        .doc-icon.doc { background: #eff6ff; color: #2563eb; }
+        .doc-icon.image { background: #f0fdf4; color: #16a34a; }
+        .doc-icon.other { background: #fafafa; color: #64748b; }
+        
+        .doc-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .doc-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .doc-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 64px;
+            color: var(--text-muted);
+            opacity: 0.3;
+            margin-bottom: 18px;
+        }
+        
+        .empty-state h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .empty-state p {
+            color: var(--text-secondary);
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            padding: 14px 18px;
+            background: var(--surface);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+            min-width: 300px;
+        }
+        
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--error); }
+        .toast.info { border-left: 4px solid var(--primary); }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="back-button">
-            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
-                &larr; Back to Query Interface
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <i class="fas fa-file-alt"></i>
+                <span>Document Q&A</span>
             </a>
+            <nav class="nav">
+                <a href="/" class="nav-link"><i class="fas fa-search"></i> Query</a>
+                <a href="/documents" class="nav-link active"><i class="fas fa-folder"></i> Documents</a>
+                <button onclick="logout()" class="btn btn-secondary btn-sm"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </nav>
         </div>
-        
-        <div class="header text-center">
-            <h1>Document Management</h1>
-            <p class="lead">Upload, view, and manage your documents</p>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Document Management</h1>
+            <p class="page-subtitle">Upload and manage your documents with vector embeddings stored in MinIO</p>
         </div>
 
-        <!-- Upload Section -->
-        <div class="upload-section">
-            <h2>Upload New Document</h2>
-            <form action="{{ url_for('upload_document') }}" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="fileInput" class="form-label">Select document to upload</label>
-                    <input class="form-control" type="file" name="file" id="fileInput" required>
+        <div class="upload-section" id="uploadSection">
+            <form id="uploadForm" class="upload-form">
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-file"></i> Select Document</label>
+                    <input type="file" id="fileInput" class="form-input" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Upload Document</button>
+                <div class="form-group" style="max-width: 250px;">
+                    <label class="form-label"><i class="fas fa-layer-group"></i> Collection Name</label>
+                    <input type="text" id="collectionName" class="form-input" value="default_collection" placeholder="default_collection">
+                </div>
+                <button type="submit" class="btn btn-primary" id="uploadBtn">
+                    <span id="uploadBtnText"><i class="fas fa-upload"></i> Upload Document</span>
+                    <span id="uploadSpinner" class="spinner" style="display: none;"></span>
+                </button>
             </form>
         </div>
 
-        <!-- Documents List -->
-        <h2>Existing Documents</h2>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
-        {% if documents %}
-            <div class="row">
-                {% for doc in documents %}
-                    <div class="col-md-6 col-lg-4">
-                        <div class="document-card">
-                            <h5>{{ doc.name }}</h5>
-                            <p class="text-muted">
-                                <small>ID: {{ doc.id }}</small><br>
-                                <small>Pages: {{ doc.number_of_pages }}</small>
-                            </p>
-                            <div class="action-buttons">
-                                <a href="{{ url_for('delete_document', document_name=doc.name) }}" 
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Are you sure you want to delete this document?')">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search documents..." onkeyup="searchDocuments()">
+                <i class="fas fa-search search-icon"></i>
             </div>
-        {% else %}
-            <div class="alert alert-info">
-                No documents found in the collection.
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterDocuments('all')"><i class="fas fa-th"></i> All</button>
+                <button class="filter-btn" onclick="filterDocuments('pdf')"><i class="fas fa-file-pdf"></i> PDF</button>
+                <button class="filter-btn" onclick="filterDocuments('doc')"><i class="fas fa-file-word"></i> DOC</button>
+                <button class="filter-btn" onclick="filterDocuments('image')"><i class="fas fa-file-image"></i> Images</button>
             </div>
-        {% endif %}
+        </div>
+
+        <div id="documentGrid" class="document-grid">
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <h3>Loading documents...</h3>
+                <p>Please wait while we fetch your documents</p>
+            </div>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let allDocuments = [];
+        let filteredDocuments = [];
+        let currentFilter = 'all';
+        let currentCollection = 'default_collection';
+
+        document.addEventListener('DOMContentLoaded', () => { loadDocuments(); });
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const collectionInput = document.getElementById('collectionName');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadBtnText = document.getElementById('uploadBtnText');
+            const uploadSpinner = document.getElementById('uploadSpinner');
+            if (!fileInput.files[0]) { showToast('Please select a file', 'error'); return; }
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('collection_name', collectionInput.value || 'default_collection');
+            uploadBtn.disabled = true;
+            uploadBtnText.style.display = 'none';
+            uploadSpinner.style.display = 'inline-block';
+            try {
+                const response = await fetch('/api/documents/upload', { method: 'POST', body: formData });
+                const result = await response.json();
+                if (response.ok) {
+                    showToast('Document "' + fileInput.files[0].name + '" uploaded successfully!', 'success');
+                    fileInput.value = '';
+                    loadDocuments();
+                } else {
+                    showToast(result.detail || 'Upload failed', 'error');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast('Upload failed: ' + error.message, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtnText.style.display = 'inline-block';
+                uploadSpinner.style.display = 'none';
+            }
+        });
+
+        const uploadSection = document.getElementById('uploadSection');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadSection.addEventListener(eventName, (e) => { e.preventDefault(); e.stopPropagation(); });
+        });
+        uploadSection.addEventListener('dragenter', () => uploadSection.classList.add('drag-over'));
+        uploadSection.addEventListener('dragleave', () => uploadSection.classList.remove('drag-over'));
+        uploadSection.addEventListener('drop', (e) => {
+            uploadSection.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files && files[0]) { document.getElementById('fileInput').files = files; }
+        });
+
+        async function loadDocuments() {
+            try {
+                const collectionName = document.getElementById('collectionName').value || 'default_collection';
+                currentCollection = collectionName;
+                const response = await fetch('/api/documents/list?collection_name=' + encodeURIComponent(collectionName));
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    // Display detailed error message from API
+                    const errorMsg = data.detail || 'Failed to load documents';
+                    console.error('Error loading documents:', errorMsg);
+                    showToast(errorMsg, 'error');
+                    renderEmptyState(errorMsg);
+                    return;
+                }
+                
+                allDocuments = data.documents || [];
+                filteredDocuments = [...allDocuments];
+                renderDocuments();
+            } catch (error) {
+                console.error('Error loading documents:', error);
+                const errorMsg = error.message || 'Network error: Unable to connect to the document service';
+                showToast(errorMsg, 'error');
+                renderEmptyState(errorMsg);
+            }
+        }
+
+        function renderDocuments() {
+            const grid = document.getElementById('documentGrid');
+            if (filteredDocuments.length === 0) {
+                renderEmptyState(currentFilter === 'all' ? 'No documents yet' : 'No documents match this filter');
+                return;
+            }
+            grid.innerHTML = filteredDocuments.map(doc => {
+                const escapedName = escapeHtml(doc.name);
+                return '<div class="document-card"><div class="doc-icon ' + getDocType(doc.name) + '"><i class="' + getDocIcon(doc.name) + '"></i></div><div class="doc-name" title="' + escapedName + '">' + escapedName + '</div><div class="doc-meta"><div><i class="fas fa-file-alt"></i> ' + (doc.number_of_pages || 'N/A') + ' pages</div><div title="' + doc.id + '"><i class="fas fa-fingerprint"></i> ID: ' + doc.id.substring(0, 12) + '...</div></div><div class="doc-actions"><button class="btn btn-secondary btn-sm" onclick="deleteDocument(\'' + escapedName + '\')"><i class="fas fa-trash"></i> Delete</button></div></div>';
+            }).join('');
+        }
+
+        function renderEmptyState(message) {
+            document.getElementById('documentGrid').innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>' + message + '</h3><p>Upload your first document to get started</p></div>';
+        }
+
+        function searchDocuments() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredDocuments = allDocuments.filter(doc => doc.name.toLowerCase().includes(query));
+            applyFilter();
+            renderDocuments();
+        }
+
+        function filterDocuments(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.filter-btn').classList.add('active');
+            filteredDocuments = [...allDocuments];
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (query) filteredDocuments = filteredDocuments.filter(doc => doc.name.toLowerCase().includes(query));
+            applyFilter();
+            renderDocuments();
+        }
+
+        function applyFilter() {
+            if (currentFilter === 'all') return;
+            filteredDocuments = filteredDocuments.filter(doc => {
+                const ext = doc.name.split('.').pop().toLowerCase();
+                switch(currentFilter) {
+                    case 'pdf': return ext === 'pdf';
+                    case 'doc': return ['doc', 'docx'].includes(ext);
+                    case 'image': return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(ext);
+                    default: return true;
+                }
+            });
+        }
+
+        async function deleteDocument(docName) {
+            if (!confirm('Are you sure you want to delete "' + docName + '"?')) return;
+            try {
+                const response = await fetch('/api/documents/delete/' + encodeURIComponent(docName) + '?collection_name=' + encodeURIComponent(currentCollection), { method: 'DELETE' });
+                const result = await response.json();
+                if (response.ok) {
+                    showToast('Document "' + docName + '" deleted successfully', 'success');
+                    loadDocuments();
+                } else {
+                    showToast(result.detail || 'Delete failed', 'error');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                showToast('Failed to delete document', 'error');
+            }
+        }
+
+        function getDocType(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            if (ext === 'pdf') return 'pdf';
+            if (['doc', 'docx'].includes(ext)) return 'doc';
+            if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(ext)) return 'image';
+            return 'other';
+        }
+
+        function getDocIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const iconMap = { 'pdf': 'fas fa-file-pdf', 'doc': 'fas fa-file-word', 'docx': 'fas fa-file-word', 'jpg': 'fas fa-file-image', 'jpeg': 'fas fa-file-image', 'png': 'fas fa-file-image', 'gif': 'fas fa-file-image', 'txt': 'fas fa-file-alt' };
+            return iconMap[ext] || 'fas fa-file';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showToast(message, type) {
+            type = type || 'success';
+            const toast = document.createElement('div');
+            toast.className = 'toast ' + type;
+            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+            toast.innerHTML = '<i class="fas ' + icon + '"></i><span>' + message + '</span>';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                fetch('/auth/api/logout', { method: 'POST' })
+                    .then(() => window.location.href = '/auth/login')
+                    .catch(() => window.location.href = '/auth/login');
+            }
+        }
+    </script>
 </body>
 </html>
